@@ -1,6 +1,9 @@
 package Structs
 
-import "math"
+import (
+	"math"
+	"reflect"
+)
 
 type Rectangle struct {
 	length float64
@@ -12,12 +15,26 @@ type Circle struct {
 }
 
 type Triangle struct {
-	base   float64
-	height float64
+	Base   float64
+	Height float64
 }
 
 type Shape interface {
 	getArea() float64
+}
+
+func ConvertToMap(item interface{}) map[string]interface{} {
+	itemValue := reflect.ValueOf(item)
+	itemType := itemValue.Type()
+
+	Result := make(map[string]interface{})
+	for i := 0; i < itemValue.NumField(); i++ {
+		fieldValue := itemValue.Field(i)
+		fieldType := itemType.Field(i)
+		Result[fieldType.Name] = fieldValue.Interface()
+	}
+
+	return Result
 }
 
 func getPerimeter(rec Rectangle) float64 {
@@ -33,5 +50,5 @@ func (cir Circle) getArea() float64 {
 }
 
 func (tri Triangle) getArea() float64 {
-	return .5 * (tri.base * tri.height)
+	return .5 * (tri.Base * tri.Height)
 }

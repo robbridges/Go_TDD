@@ -1,6 +1,7 @@
 package Structs
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -14,23 +15,6 @@ func TestPerimeter(t *testing.T) {
 }
 
 func TestArea(t *testing.T) {
-
-	//checkArea := func(t testing.TB, shape Shape, hasArea float64) {
-	//	t.Helper()
-	//	got := shape.getArea()
-	//	if got != hasArea {
-	//		t.Errorf("We aren't calculating the area right, it should be %g, but got %g", hasArea, got)
-	//	}
-	//}
-	//
-	//t.Run("Rectangle area", func(t *testing.T) {
-	//	rectangle := Rectangle{12.2, 13.4}
-	//	checkArea(t, rectangle, 163.48)
-	//})
-	//t.Run("Circle area", func(t *testing.T) {
-	//	circle := Circle{10}
-	//	checkArea(t, circle, 314.1592653589793)
-	//})
 
 	areaTests := []struct {
 		name    string
@@ -47,5 +31,14 @@ func TestArea(t *testing.T) {
 		if got != tt.hasArea {
 			t.Errorf("%#v got %g hasArea %g", tt.shape, got, tt.hasArea)
 		}
+	}
+}
+
+func TestStructToMap(t *testing.T) {
+	exampleTriangleMap := map[string]interface{}{"base": 3, "height": 6}
+	triangle := Triangle{Base: 3, Height: 6}
+	mapGot := ConvertToMap(triangle)
+	if reflect.DeepEqual(mapGot, exampleTriangleMap) {
+		t.Errorf("They are not similar we wanted %v, but got %v", exampleTriangleMap, mapGot)
 	}
 }
