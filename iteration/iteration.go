@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func Iterate_Character(str string, count int) (string, error) {
+func IterateCharacter(str string, count int) (string, error) {
 	if count < 0 {
 		return "Count must be a positive value", errors.New("Invalid count value")
 	}
@@ -19,7 +19,7 @@ func Iterate_Character(str string, count int) (string, error) {
 	return iteratedString, nil
 }
 
-// A replace function to replace characters within a string, you pass the string you want to replace, the match you want
+// ReplaceCharacter A replace function to replace characters within a string, you pass the string you want to replace, the match you want
 // replaced and what you want it replaced with the value -1 is passed in to indicate we want to replace all matches instead
 // of n
 func ReplaceCharacter(origionalString, replaced, replacedBy string) string {

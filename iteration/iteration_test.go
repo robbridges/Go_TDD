@@ -4,7 +4,7 @@ import "testing"
 
 func Test_Iterate_Character(t *testing.T) {
 	want := "ababababab"
-	got, err := Iterate_Character("ab", 5)
+	got, err := IterateCharacter("ab", 5)
 	if err != nil {
 		t.Errorf("An error was raised with an appropriate value was passed")
 	}
@@ -16,7 +16,7 @@ func Test_Iterate_Character(t *testing.T) {
 
 func Test_Iterate_Character_Sad(t *testing.T) {
 	want := "Count must be a positive value"
-	got, err := Iterate_Character("ab", -1)
+	got, err := IterateCharacter("ab", -1)
 	if err == nil {
 		t.Errorf("There whould have been an error on a failed value ")
 	}
