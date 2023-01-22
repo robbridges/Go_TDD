@@ -7,8 +7,15 @@ import (
 
 type Dictionary map[string]string
 
+type DictionaryErr string
+
+const (
+	ErrNotFound      = "this key value was not in the map"
+	ErrAlreadyExists = "this key already exists, please use the Update method to change the value"
+)
+
 func (d Dictionary) Search(k string) (string, error) {
-	var notFoundError = errors.New(fmt.Sprintf("no value found for %s", k))
+	var notFoundError = errors.New(fmt.Sprintf(ErrNotFound))
 	if d[k] == "" {
 		return "No value found of K", notFoundError
 	}
@@ -18,7 +25,7 @@ func (d Dictionary) Search(k string) (string, error) {
 // We're modifying a dictionary but not passing in a pointer. This is because a map is a reference type, and it's just a pointer
 // to a go data thing called a hmap. So this just creates a copy of the map and the underlying hmap
 func (d Dictionary) Add(k, v string) error {
-	keyAlreadyExists := errors.New("This key already exists, please use the Update method to change the value")
+	keyAlreadyExists := errors.New(ErrAlreadyExists)
 	_, ok := d[k]
 	if ok {
 		return keyAlreadyExists
@@ -47,7 +54,7 @@ func (d Dictionary) Update(k, v string) error {
 }
 
 func notFoundHelper(d Dictionary, k string) error {
-	notFoundError := errors.New("This value was not in the map")
+	notFoundError := errors.New(ErrNotFound)
 	_, ok := d[k]
 	if !ok {
 		return notFoundError

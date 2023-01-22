@@ -19,10 +19,10 @@ func TestSearch(t *testing.T) {
 	t.Run("Dictionary sad not found path", func(t *testing.T) {
 		_, err := testDict.Search("yam")
 		if err == nil {
-			t.Errorf("This should have returned an error")
+			t.Errorf("this should have returned an error")
 		}
-		if err.Error() != "no value found for yam" {
-			t.Errorf("We got the wrong error message, we got %s wanted no value found for yam", err.Error())
+		if err.Error() != "this key value was not in the map" {
+			t.Errorf("We got the wrong error message wanted this key value was not in the map got %s", err.Error())
 		}
 	})
 }
@@ -51,8 +51,8 @@ func TestAdd(t *testing.T) {
 		if err == nil {
 			t.Errorf("We expected an error adding a duplicate value")
 		}
-		if err.Error() != "This key already exists, please use the Update method to change the value" {
-			t.Errorf("Wrong error message returned")
+		if err.Error() != "this key already exists, please use the Update method to change the value" {
+			t.Errorf("Wrong error message returned %s", err.Error())
 		}
 	})
 }
