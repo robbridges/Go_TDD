@@ -28,5 +28,6 @@ func CountDown(
 		fmt.Fprintln(w, v)
 		sleeper.Sleep()
 	}
+
 	fmt.Fprint(w, finalWord)
 }
