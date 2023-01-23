@@ -10,11 +10,6 @@ import (
 const write = "write"
 const sleep = "sleep"
 
-type ConfigurableSleeper struct {
-	duration time.Duration
-	sleep    func(duration time.Duration)
-}
-
 type SpyTime struct {
 	durationSlept time.Duration
 }
@@ -97,8 +92,4 @@ func (s *SpyCountDownOperations) Write(p []byte) (n int, err error) {
 
 func (s *SpyTime) Sleep(duration time.Duration) {
 	s.durationSlept = duration
-}
-
-func (c *ConfigurableSleeper) Sleep() {
-	c.sleep(c.duration)
 }
