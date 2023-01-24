@@ -20,7 +20,7 @@ func TestRacer(t *testing.T) {
 		fastURL := fastServer.URL
 
 		want := fastURL
-		got, err := Racer(slowURL, fastURL)
+		got, err := Racer(slowURL, fastURL, 1*time.Second)
 		if err != nil {
 			t.Errorf("We got an error when we weren't meant to")
 		}
@@ -30,15 +30,15 @@ func TestRacer(t *testing.T) {
 		}
 	})
 	t.Run("Returns an error if a server doesn't respond within 10 seconds", func(t *testing.T) {
-		slowServer := makeDelayedSever(11 * time.Second)
-		fastServer := makeDelayedSever(12 * time.Second)
+		slowServer := makeDelayedSever(3 * time.Second)
+		fastServer := makeDelayedSever(3 * time.Second)
 
 		errorMessage := fmt.Sprintf("Timed out waiting for %s, and %s", slowServer.URL, fastServer.URL)
 
 		defer slowServer.Close()
 		defer fastServer.Close()
 
-		_, err := Racer(slowServer.URL, fastServer.URL)
+		_, err := Racer(slowServer.URL, fastServer.URL, 2*time.Second)
 		if err == nil {
 			t.Errorf("This should have returned an error")
 		}
