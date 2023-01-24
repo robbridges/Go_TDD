@@ -1,12 +1,20 @@
 package main
 
 import (
-	"go_tdd/Mocking"
-	"os"
-	"time"
+	"fmt"
+	walk "go_tdd/Reflection"
 )
 
 func main() {
-	sleeper := &Mocking.ConfigurableSleeper{5 * time.Second, time.Sleep}
-	Mocking.CountDown(os.Stdout, sleeper)
+	x := struct {
+		Name string
+		Age  int
+	}{"Rob", 35}
+	var got []string
+	walk.Walk(x, func(input string) {
+		got = append(got, input)
+	})
+
+	fmt.Printf("We got the value %s back", string(got[0]))
+
 }
