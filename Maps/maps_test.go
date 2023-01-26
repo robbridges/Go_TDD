@@ -46,7 +46,7 @@ func TestAdd(t *testing.T) {
 	})
 	t.Run("Cannot use Add to over write existing value", func(t *testing.T) {
 		key := "Test"
-		value := "New Value"
+		value := "New Arabic"
 		err := testDict.Add(key, value)
 		if err == nil {
 			t.Errorf("We expected an error adding a duplicate value")
